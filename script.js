@@ -11,7 +11,6 @@ function addNewTask() {
 function removeLast() {
 
     let lastTodo = document.querySelector('ul li:last-child')
-    console.log(lastTodo);
     lastTodo.remove()
 }
 
@@ -24,23 +23,20 @@ function removeFirst() {
 
 function getTasksAsArray() {
 
-    let output = '';
-
     let allTasks = document.getElementsByTagName('li')
-    for (let i = 0; i < allTasks.length; i++) {
-        output += allTasks[i].innerText + ', '
+    let tasksArray = [];
+
+    for (let i of allTasks) {
+        tasksArray.push(i.innerText)
     }
+    return tasksArray
 
-    console.log(output)
 }
-
-
-
 
 function changeTaskBackgroundColor() {
     let allTasks = document.getElementsByTagName('li')
-    for (let i = 0; i < allTasks.length; i++) {
-        allTasks[i].style.backgroundColor = colorPicker.value
+    for (let i of allTasks) {
+        i.style.backgroundColor = colorPicker.value
     }
 }
 
@@ -49,26 +45,27 @@ colorPicker.addEventListener('change', changeTaskBackgroundColor)
 
 
 
-function bubbleSort() {
+// Ex. 10
+
+function bubblesort() {
     let allTasks = document.getElementsByTagName('li')
+    let tasksArray = getTasksAsArray();
 
-    for (let i = 0; i < allTasks.length; i++) {
-
-        // Last i elements are already in place 
-        for (let j = 0; j < (allTasks.length - i - 1); j++) {
-
-            // Checking if the item at present iteration
-            // is greater than the next iteration
-            if (allTasks[j].innerHTML > allTasks[j + 1]) {
-
-                // If the condition is true then swap them
-                let temp = arr[j]
-                arr[j] = arr[j + 1]
-                arr[j + 1] = temp
+    let len = tasksArray.length;
+    for (let i = 0; i < len; i++) {
+        for (let j = 0; j < len; j++) {
+            if (tasksArray[j] > tasksArray[j + 1]) {
+                let tmp = tasksArray[j];
+                tasksArray[j] = tasksArray[j + 1];
+                tasksArray[j + 1] = tmp;
             }
         }
     }
-
-    console.log(arr);
+    let x = tasksArray.length - 1;
+    for (let i = allTasks.length - 1; i >= 0; i--) {
+        allTasks[i].innerHTML = tasksArray[x]
+        x--
+    }
+    return tasksArray;
 
 }
