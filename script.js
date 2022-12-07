@@ -35,14 +35,18 @@ function getTasksAsArray() {
 }
 
 
-function changeTaskBackgroundColor() {
 
-    let color = document.getElementById('colorPicker')
+
+function changeTaskBackgroundColor() {
     let allTasks = document.getElementsByTagName('li')
     for (let i = 0; i < allTasks.length; i++) {
-        allTasks[i].style.backgroundColor = color.value
+        allTasks[i].style.backgroundColor = colorPicker.value
     }
 }
+
+let colorPicker = document.getElementById('colorPicker')
+colorPicker.addEventListener('change', changeTaskBackgroundColor)
+
 
 
 function bubbleSort() {
